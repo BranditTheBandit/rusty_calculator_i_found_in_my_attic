@@ -6,7 +6,7 @@ This is mainly just to teach me how to code in Rust.
 
 ## Building/Running
 
-To run you can just use one of the release binaries, or you can build from source using Cargo - `cargo run` to run normally, `cargo build --release` to compile to binary.
+To run you can just use one of the release binaries (need to run from console!!), or you can build from source using Cargo - `cargo run` to run normally, `cargo build --release` to compile to binary.
 
 ## Donating
 
