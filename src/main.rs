@@ -8,12 +8,13 @@ enum Operation {
     Divide,
     Factorial,
     Arcsin,
+    OperationThatSpamsTheNumberInYourConsole,
     Invalid
 }
 
 fn main() {
     println!("Welcome, surgeon!");
-    println!("What operation would you like to do today? (Options: +, -, /, factorial, arcsin)");
+    println!("What operation would you like to do today? (Options: +, -, /, factorial, arcsin, operationthatspamsthenumberinyourconsole)");
     loop {
         print!("> ");
         // why tf does rust need a library to read text from the console :sob:
@@ -27,6 +28,7 @@ fn main() {
             "/" => Divide,
             "factorial" => Factorial,
             "arcsin" => Arcsin,
+            "operationthatspamsthenumberinyourconsole" => OperationThatSpamsTheNumberInYourConsole,
             _ => Invalid
         };
 
@@ -36,12 +38,17 @@ fn main() {
         }
 
         loop {
-            if operation == Arcsin || operation == Factorial {
+            if operation == Arcsin || operation == Factorial || operation == OperationThatSpamsTheNumberInYourConsole {
                 print!("put ur number here > ");
                 let number: f32 = text_io::read!("{}\n");
                 if (number > 1. || number < -1.) && operation == Arcsin {
                     println!("Must be between -1 and 1!");
                     continue;
+                }
+                if operation == OperationThatSpamsTheNumberInYourConsole {
+                    for _ in 1..200000 { print!("{}", number); }
+                    println!();
+                    break;
                 }
                 let result = match operation {
                     Arcsin => arcsin(number),
