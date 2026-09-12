@@ -1,16 +1,19 @@
-#[derive(PartialEq)]
+use rust_math::trigonometry::arcsin;
+use rust_math::num::factorial;
+
+#[derive(PartialEq)] // needed for ==
 enum Operation {
     Add,
     Subtract,
     Divide,
-    LogBase124,
+    Factorial,
     Arcsin,
     Invalid
 }
 
 fn main() {
     println!("Welcome, surgeon!");
-    println!("What operation would you like to do today? (Options: +, -, /, logbase124, arcsin)");
+    println!("What operation would you like to do today? (Options: +, -, /, factorial, arcsin)");
     loop {
         print!("> ");
         // why tf does rust need a library to read text from the console :sob:
@@ -22,17 +25,48 @@ fn main() {
             "+" => Add,
             "-" => Subtract,
             "/" => Divide,
-            "logbase124" => LogBase124,
+            "factorial" => Factorial,
             "arcsin" => Arcsin,
             _ => Invalid
         };
 
         if operation == Invalid {
             println!("That's not an option!!! >:(\nfr tho what operation do you wanna do");
-        } else {
-            println!("valid option! no way!");
+            continue;
+        }
+
+        loop {
+            if operation == Arcsin || operation == Factorial {
+                print!("put ur number here > ");
+                let number: f32 = text_io::read!("{}\n");
+                if (number > 1. || number < -1.) && operation == Arcsin {
+                    println!("Must be between -1 and 1!");
+                    continue;
+                }
+                let result = match operation {
+                    Arcsin => arcsin(number),
+                    Factorial => factorial(number as i32) as f32,
+                    _ => 0.
+                };
+                println!("the answer... iS {}!!!!!", result);
+            } else {
+                print!("First number > ");
+                let number_1: f64 = text_io::read!("{}\n");
+                print!("second number > ");
+                let number_2: f64 = text_io::read!("{}\n");
+
+                println!("the answer........... IS {}", match operation {
+                    Add => number_1 + number_2,
+                    Subtract => number_1 - number_2,
+                    Divide => number_1 / number_2,
+                    _ => 0.
+                })
+            }
+
             break;
         }
+
+        break;
     }
     println!("ok bye");
 }
