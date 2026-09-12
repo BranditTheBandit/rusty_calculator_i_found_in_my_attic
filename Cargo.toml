@@ -1,0 +1,6 @@
+[package]
+name = "rusty_calculator_i_found_in_my_attic"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
