@@ -2,6 +2,9 @@
 
 This is a super simple CLI calculator app that features addition, subtraction, division, factorial, arcsin, and operationthatspamsthenumberinyourconsole - all the essentials in one place!
 
+![](./images/screenshot1.png)
+![](./images/screenshot2.png)
+
 This is mainly just to teach me how to code in Rust.
 
 ## Building/Running
