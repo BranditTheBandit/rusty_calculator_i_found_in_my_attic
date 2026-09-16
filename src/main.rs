@@ -1,5 +1,4 @@
-use rust_math::trigonometry::arcsin;
-use rust_math::num::factorial;
+use libm::{asin};
 
 #[derive(PartialEq)] // needed for ==
 enum Operation {
@@ -10,6 +9,17 @@ enum Operation {
     Arcsin,
     OperationThatSpamsTheNumberInYourConsole,
     Invalid
+}
+
+fn factorial(input: u8) -> Option<f64> {
+    if input > 20 { return None; }
+    else {
+        let mut output: f64 = 1.;
+        for i in 1..input {
+            output *= i as f64;
+        }
+        Some(output)
+    }
 }
 
 fn main() {
@@ -40,7 +50,7 @@ fn main() {
         loop {
             if operation == Arcsin || operation == Factorial || operation == OperationThatSpamsTheNumberInYourConsole {
                 print!("put ur number here > ");
-                let number: f32 = text_io::read!("{}\n");
+                let number: f64 = text_io::read!("{}\n");
                 if (number > 1. || number < -1.) && operation == Arcsin {
                     println!("Must be between -1 and 1!");
                     continue;
@@ -51,11 +61,14 @@ fn main() {
                     break;
                 }
                 let result = match operation {
-                    Arcsin => arcsin(number),
-                    Factorial => factorial(number as i32) as f32,
-                    _ => 0.
+                    Arcsin => Some(asin(number)),
+                    Factorial => factorial(number as u8),
+                    _ => None
                 };
-                println!("the answer... iS {}!!!!!", result);
+                match result {
+                    Some(value) => println!("the answer... iS {}!!!!!", value),
+                    None => println!("number must be <= 20!")
+                }
             } else {
                 print!("First number > ");
                 let number_1: f64 = text_io::read!("{}\n");

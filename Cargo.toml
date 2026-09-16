@@ -4,5 +4,5 @@ version = "1.0.0"
 edition = "2024"
 
 [dependencies]
-rust_math = "0.3.7"
+libm = "0.2.16"
 text_io = "0.1.13"
